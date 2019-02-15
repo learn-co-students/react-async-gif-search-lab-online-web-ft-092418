@@ -7,17 +7,16 @@ export default class GifListContainer extends Component {
     constructor() {
         super()
         this.state = {
-            gifUrls: [],
-            searchQ: ''
-        }
-    }
-
-    componentDidMount() {
-
+            gifUrls: []
+        }        
     }
 
     componentDidUpdate() {
-        fetch('http://api.giphy.com/v1/gifs/search?q=' + this.state.searchQ + '&api_key=dc6zaTOxFJmzC&rating=g')
+        console.log('updating')   
+    }
+
+    fetchGifs = (searchQ) => {
+        fetch('http://api.giphy.com/v1/gifs/search?q=' + searchQ + '&api_key=dc6zaTOxFJmzC&rating=g')
             .then(response => {
                 return response.json()
             })
@@ -25,17 +24,11 @@ export default class GifListContainer extends Component {
                 this.setState({gifUrls: myJson.data.slice(0, 3).map(gif => gif.images.original.url)})
             })
     }
-
-    onSubmit = (query) => {
-        console.log('from container: ', query)
-        this.setState({
-            searchQ: query
-        })
-    }
-
+    
     render () {
+        
         return (<div>
-            < GifSearch onSubmit={this.onSubmit}/>
+            < GifSearch fetchGifs={this.fetchGifs}/>
             <GifList gifUrls={this.state.gifUrls} />
 
             </div>

@@ -20,7 +20,7 @@ export default class GifSearch extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
         console.log('from search: ', this.state.input)
-        this.props.onSubmit(this.state.input)
+        this.props.fetchGifs(this.state.input)
     }
     
     
