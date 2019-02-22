@@ -5,15 +5,21 @@ import GifSearch from '../components/GifSearch';
 class GifListContainer extends React.Component {
 
     state = {
-        gifs: []
+        gifs: [],
+        query: ''
     }
 
  
     componentDidMount() {
         fetch(`http://api.giphy.com/v1/gifs/search?q=YOUR QUERY HERE&api_key=dc6zaTOxFJmzC&rating=g`)
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => {
+            this.setState({
+                gifs: data.images.original.url
+            })
+        })
     }
+    
 
     render() {
         return (
@@ -24,8 +30,13 @@ class GifListContainer extends React.Component {
         )
     }
 
-    submitHandler = () => {
+    submitHandler = (e) => {
+        e.preventDefault()
 
+    }
+
+    handleChange = (event) => {
+        this.setState({query: event.target.value})
     }
 
 }
