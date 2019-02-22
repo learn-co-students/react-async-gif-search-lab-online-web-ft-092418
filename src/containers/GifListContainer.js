@@ -9,12 +9,13 @@ class GifListContainer extends React.Component {
         query: ''
     }
 
+
     fetchGif = (query) => {
         fetch(`http://api.giphy.com/v1/gifs/search?q=${query}&api_key=dc6zaTOxFJmzC&rating=g`)
         .then(response => response.json())
         .then(data => {
             this.setState({
-                gifList: data.map((gif) => { 
+                gifList: data.data.map((gif) => { 
                     return {url: gif.images.original.url}
                 })
             })
@@ -35,7 +36,7 @@ class GifListContainer extends React.Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-
+        this.fetchGif(this.state.query)
     }
 
     handleChange = (event) => {
