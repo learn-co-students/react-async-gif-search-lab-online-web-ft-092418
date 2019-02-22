@@ -24,6 +24,7 @@ class GifListContainer extends React.Component {
 
 
 
+
     render() {
         return (
             <div>
@@ -35,7 +36,7 @@ class GifListContainer extends React.Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-
+        
     }
 
     handleChange = (event) => {
