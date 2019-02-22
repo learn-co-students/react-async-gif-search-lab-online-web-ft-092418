@@ -9,8 +9,7 @@ class GifListContainer extends React.Component {
         query: ''
     }
 
- 
-    componentDidMount() {
+    fetchGif = (query) => {
         fetch(`http://api.giphy.com/v1/gifs/search?q=${query}&api_key=dc6zaTOxFJmzC&rating=g`)
         .then(response => response.json())
         .then(data => {
@@ -28,15 +27,15 @@ class GifListContainer extends React.Component {
     render() {
         return (
             <div>
-                <GifSearch submitHandler={this.submitHandler}/>
-                <GifList gifs={this.state.gifs}/>
+                <GifSearch submitHandler={this.submitHandler} handleChange={this.handleChange} fetchGif={this.fetchGif}/>
+                <GifList gifList={this.state.gifList}/>
             </div>
         )
     }
 
     submitHandler = (e) => {
         e.preventDefault()
-        
+
     }
 
     handleChange = (event) => {
